@@ -31,6 +31,8 @@ class Agent:
             qs = self.qnet(state)
 
         self.qnet.train()
+        # Implementing the epsilon-greedy action selection strategy:
+        # This approach balances exploration and exploitation.
         return qs.argmax().item() if np.random.rand() >= self.epsilon else np.random.choice(self.action_size)
 
     def update(self, state, action, reward, next_state, done):
@@ -46,6 +48,12 @@ class Agent:
         next_q = next_qs.max(1)[0]
         next_q.detach()
         
+        # Bellman Equation:
+        # This equation updates the target value for the Q-learning algorithm.
+        # It computes the target as the immediate reward plus the discounted future reward, 
+        # which is weighted by the discount factor (gamma).
+        # The term (1 - done) ensures that if the episode has ended (done = True), 
+        # the future reward contribution is zero, as there are no subsequent states.
         target = reward + (1 - done) * self.gamma * next_q
 
         loss_fn = nn.MSELoss()
