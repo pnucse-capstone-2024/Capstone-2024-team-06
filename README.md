@@ -240,6 +240,15 @@ Ctrl + C 시 학습 또는 추론이 중단되며, Total Reward 창을 닫으면
 
 **모델 추론**
 
+0. Pretrained Model
+   
+   아래 링크에서 미리 학습 완료한 Carla 강화학습 모델을 받을 수 있다.
+   
+ - https://drive.google.com/file/d/1F__vD_Jpml5k_sgPX6YjsBXZSXZiMISq/view?usp=sharing
+   
+   받은 모델을 app > results > carla > training 폴더에 위치시키면 된다.
+ 
+
 1. 학습한 모델로 추론
    
 ```
