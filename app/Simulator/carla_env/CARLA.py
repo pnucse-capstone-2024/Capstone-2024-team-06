@@ -27,7 +27,7 @@ from numpy import random
 
 import cv2
 
-GLOBAL_TICK_LIMIT = 3360   ## 한 에피소드당 tick수
+GLOBAL_TICK_LIMIT = 3360
 
 MAX_VEHICLE_NUM = 400
 
@@ -435,13 +435,11 @@ class CARLA:
 
         image_tensors = []
 
-        # 기본 신호 길이 틱 진행
         for i in range(10):
             self.env.Tick(4)
 
             self.update_traffic_status(yellowFlag=False)
 
-        # get_image (4 * H * W)
         image_array = self.env.get_images_array()
 
         for image in image_array:
@@ -454,6 +452,7 @@ class CARLA:
         top_row = torch.cat((image_tensors[0], image_tensors[1]), dim=2) 
         bottom_row = torch.cat((image_tensors[2], image_tensors[3]), dim=2) 
         state = torch.cat((top_row, bottom_row), dim=1)
+        
         return state
     
     def update_traffic_status(self, yellowFlag):
@@ -478,7 +477,7 @@ class CARLA:
         bottom_row = np.hstack((frames_for_display_list[2], frames_for_display_list[3]))
         combined_image = np.vstack((top_row, bottom_row))
 
-        # # Show the combined image in one window
+        # Show the combined image in one window
         cv2.imshow('4 Directions View', combined_image)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             #out.release()
