@@ -7,38 +7,10 @@ import torch
 import matplotlib.pyplot as plt
 import Simulator
 from datetime import datetime
-
-env_name = 'CARLA'  # 'SUMO' 또는 'CARLA'
-test_fixed_signals = False  # 'True': to run fixed traffic signals / 'False': to run traffic signal inference by trained DQN model
-total_episodes = 2000 # default : 100
-action_size = 4  # 환경에 맞는 액션 크기 설정
-start_episode = 0
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-# 환경 및 학습된 에이전트 설정
-env = Simulator.make(env_name)  # 또는 'CARLA'
-agent = DQN.AgentInference(action_size, device=device)
-
-reward_history = []
-
-# Load the trained model for inference
-agent.load_model(f"results\{env_name.lower()}\\training\dqn_model.pth")
-
-# 그래프 설정
-plt.ion()
-fig, ax = plt.subplots(figsize=(8, 6), dpi=100)  # Large size and high DPI
-line, = ax.plot([], [], color='blue', linewidth=2)  # label='Total Rewards'
-plt.xlabel('Episode', fontsize=12)
-plt.ylabel('Total Reward', fontsize=12)
-plt.title('DQN Total Reward by Episodes - Inference', fontsize=16)
-plt.xticks(fontsize=10)
-plt.yticks(fontsize=10)
-plt.grid(True, linestyle='--', alpha=0.7)
-# plt.legend(fontsize=14)
+import argparse
 
 
-def save_graph(reward_history):
+def save_graph(reward_history, ax, env_name):
     # After training, process and save the final graph
     start_point = (0, reward_history[0])
     end_point = (len(reward_history)-1, reward_history[-1])
@@ -76,60 +48,110 @@ def write_to_file(filename, data_list):
         file.write(line)
 
 
-try:
-    for current_episode in range(start_episode, total_episodes):
-        print(f"\n\n### Starting Episode {current_episode} ###")
-        state = env.start()
-        done = False
-        total_reward = 0
-        
-        i = 0
-        ## 48 24 48 24  / 12 = 4 2 4 2
-        fixed_signals_pattern = [0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 3]
+def main():
+    parser = argparse.ArgumentParser(description="A simple argparse example")
 
-        while not done:
-            if test_fixed_signals == True:
-                action = fixed_signals_pattern[i]
-                i = (i+1) % len(fixed_signals_pattern)
-            else:
-                action = agent.get_action(state)
+    parser.add_argument(
+        "-s", "--simulator",
+        type=str,
+        help="Choose Simulator(carla or sumo)",
+        required=True
+    )
 
-            next_state, reward, done = env.step(action)
-            state = next_state
-            total_reward += reward
+    parser.add_argument(
+        "-f", "--fixed",
+        action="store_true",
+        help="option to run fixed traffic signals",
+    )
+
+    args = parser.parse_args()
+
+    env_name = args.simulator.upper()
+    test_fixed_signals = args.fixed  # 'True': to run fixed traffic signals / 'False': to run traffic signal inference by trained DQN model
+    total_episodes = 2000
+    action_size = 4  # 환경에 맞는 액션 크기 설정
+    start_episode = 0
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # 환경 및 학습된 에이전트 설정
+    env = Simulator.make(env_name)
+    agent = DQN.AgentInference(action_size, device=device)
+
+    reward_history = []
+
+    # Load the trained model for inference
+    agent.load_model(f"results\{env_name.lower()}\\training\dqn_model.pth")
+
+    # 그래프 설정
+    plt.ion()
+    fig, ax = plt.subplots(figsize=(8, 6), dpi=100)  # Large size and high DPI
+    line, = ax.plot([], [], color='blue', linewidth=2)  # label='Total Rewards'
+    plt.xlabel('Episode', fontsize=12)
+    plt.ylabel('Total Reward', fontsize=12)
+    plt.title('DQN Total Reward by Episodes - Inference', fontsize=16)
+    plt.xticks(fontsize=10)
+    plt.yticks(fontsize=10)
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+
+    try:
+        for current_episode in range(start_episode, total_episodes):
+            print(f"\n\n### Starting Episode {current_episode} ###")
+            state = env.start()
+            done = False
+            total_reward = 0
             
+            i = 0
+            fixed_signals_pattern = [0, 0, 0, 0, 1, 1, 2, 2, 2, 2, 3, 3]
+
+            while not done:
+                if test_fixed_signals == True:
+                    action = fixed_signals_pattern[i]
+                    i = (i+1) % len(fixed_signals_pattern)
+                else:
+                    action = agent.get_action(state)
+
+                next_state, reward, done = env.step(action)
+                state = next_state
+                total_reward += reward
+                
+            env.reset()
+            torch.cuda.empty_cache()
+
+            reward_history.append(total_reward)
+            print(f"### Ending Episode {current_episode}, Total Reward: {total_reward} ###")
+
+            # 그래프 업데이트
+            line.set_xdata(range(0, len(reward_history)))
+            line.set_ydata(reward_history)
+            ax.relim()
+            ax.autoscale_view()
+
+            # Set x-axis ticks to automatic
+            ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))  # Automatic ticks for integers
+
+            plt.draw()
+            plt.pause(0.1)
+
+
+    except KeyboardInterrupt:
+        print("Inference interrupted by Keyboard.")
+    except Exception as e:
+        print(f"Error during episode {current_episode}: {e}")
+        print("Detailed traceback:")
+        traceback.print_exc()  # This will print the full traceback of the error
+    finally:
         env.reset()
-        torch.cuda.empty_cache()
 
-        reward_history.append(total_reward)
-        print(f"### Ending Episode {current_episode}, Total Reward: {total_reward} ###")
+    if len(reward_history) > 0:
+        save_graph(reward_history, ax, env_name)
+        write_to_file(f'results\{env_name.lower()}\inference\\reward_history_inference.txt', reward_history)
 
-        # 그래프 업데이트
-        line.set_xdata(range(0, len(reward_history)))
-        line.set_ydata(reward_history)
-        ax.relim()
-        ax.autoscale_view()
-
-        # Set x-axis ticks to automatic
-        ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))  # Automatic ticks for integers
-
-        plt.draw()
-        plt.pause(0.1)
+    plt.ioff()
+    print("[ To End the program, please close <Figure 1> window. ]")
+    plt.show(block=True)
 
 
-except KeyboardInterrupt:
-    print("Inference interrupted by Keyboard.")
-except Exception as e:
-    print(f"Error during episode {current_episode}: {e}")
-    print("Detailed traceback:")
-    traceback.print_exc()  # This will print the full traceback of the error
-finally:
-    env.reset()
-
-if len(reward_history) > 0:
-    save_graph(reward_history)
-    write_to_file(f'results\{env_name.lower()}\inference\\reward_history_inference.txt', reward_history)
-
-plt.ioff()
-print("[ To End the program, please close <Figure 1> window. ]")
-plt.show(block=True)
+if __name__ == "__main__":
+    main()
