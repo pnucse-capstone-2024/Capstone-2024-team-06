@@ -1,205 +1,347 @@
-# Template for Capstone
-이 레파지토리는 학생들이 캡스톤 프로젝트 결과물을 위한 레파지토리 생성시에 참고할 내용들을 담고 있습니다.
-1. 레파지토리 생성
-2. 레파지토리 구성
-3. 레파지토리 제출 
-4. README.md 가이드라인
-5. README.md 작성팁
+# 강화학습기반 교차로 동적 신호제어시스템
 
----
+&nbsp;
 
-## 1. 레파지토리 생성
-- [https://classroom.github.com/a/NJK_cPkH](https://classroom.github.com/a/NJK_cPkH)
-- 위 Github Classroom 링크에 접속해 본인 조의 github 레파지토리를 생성하세요.
-<img src="https://github.com/user-attachments/assets/b5a7f34a-e146-4253-b57d-672737a75a50" alt="깃헙 클래스룸 레포 생성" width="600" />
-
-- 레포지토리 생성 시 팀명은 `TEAM-{조 번호}` 형식으로 생성하세요.
-- 예를 들어, 2024년도 3조의 팀명은 `TEAM-03` 입니다.
-- 이 경우 `Capstone2024-TEAM-03`이란 이름으로 레파지토리가 생성됩니다.
-
----
-
-## 2. 레파지토리 구성
-- 레파지토리 내에 README.md 파일 생성하고 아래의 가이드라인과 작성팁을 참고하여 README.md 파일을 작성하세요. (이 레파지토리의 SAMPLE_README.md 참조)
-- 레파지토리 내에 docs 디렉토리를 생성하고 docs 디렉토리 내에는 과제 수행 하면서 작성한 각종 보고서, 발표자료를 올려둡니다. (이 레파지토리의 docs 디렉토리 참조)
-- 그 밖에 레파지토리의 폴더 구성은 과제 결과물에 따라 자유롭게 구성하되 가급적 코드의 목적이나 기능에 따라 디렉토리를 나누어 구성하세요.
-
----
-
-## 3. 레파지토리 제출 
-
-- **`[주의]` 레파지토리 제출**은 해당 레파지토리의 ownership을 **학과 계정**으로 넘기는 것이므로 되돌릴 수 없습니다.
-- **레파지토리 제출** 전, 더 이상 수정 사항이 없는지 다시 한번 확인하세요.
-- github 레파지토리에서 Settings > General > Danger zone > Transfer 클릭
-  <img src="https://github.com/user-attachments/assets/cb2361d4-e07e-4b5d-9116-aa80dddd8a8b" alt="소유주 변경 경로" width="500" />
-  
-- [ Specify an organization or username ]에 'PNUCSE'를 입력하고 확인 메세지를 입력하세요.
-  <img src="https://github.com/user-attachments/assets/7c63955d-dcfe-4ac3-bdb6-7d2620575f3a" alt="소유주 변경" width="400" />
-
----
-
-## 4. README.md 가이드 라인
-- README 파일 작성시에 아래의 5가지 항목의 내용은 필수적으로 포함해야 합니다.
-- 아래의 5가지 항목이외에 프로젝트의 이해를 돕기 위한 내용을 추가해도 됩니다.
-- SAMPLE_README.md 이 단순한 형태의 예제이니 참고하세요.
-
-```markdown
 ### 1. 프로젝트 소개
-#### 1.1. 배경 및 필요성
-> 프로젝트를 실행하게 된 배경 및 필요성을 작성하세요.
 
-#### 1.2. 목표 및 주요 내용
-> 프로젝트의 목표 및 주요 내용을 작성하세요.
+국내에서 가장 일반적으로 사용하는 교차로 신호제어 시스템은 "시간제어식 신호"이다. 이는 특정 상황별로 주기를 미리 지정해두고, 해당 상황이 발생하면 인위적인 조작을 통해 적용하는 방식이다. 하지만 기본적으로 미리 정해진 여러 옵션에서 단순히 선택을 하는 방식이기 때문에 정밀한 최적화가 힘들고, 인위적인 제어가 필요하기 때문에 실시간으로 변하는 교통량에 대응하는데 한계가 있다.
 
-### 2. 상세설계
-#### 2.1. 시스템 구성도
-> 시스템 구성도(infra, front, back등의 node 간의 관계)의 사진을 삽입하세요.
+&nbsp;
 
-#### 2.1. 사용 기술
-> 스택 별(backend, frontend, designer등) 사용한 기술 및 버전을 작성하세요.
-> 
-> ex) React.Js - React14, Node.js - v20.0.2
+따라서 이러한 문제를 해결하기 위해, 본 프로젝트에서는 **강화학습을 활용하여 동적인 신호제어 시스템**을 개발하였다.
 
-### 3. 설치 및 사용 방법
-> 제품을 설치하기 위헤 필요한 소프트웨어 및 설치 방법을 작성하세요.
->
-> 제품을 설치하고 난 후, 실행 할 수 있는 방법을 작성하세요.
+- 불필요한 대기시간을 최소화하는 합리적 신호체계 구현
+- 불규칙하게 증감하는 교통량에도 대응할 수 있는 신호체계 구현
+- 동적인 신호순서를 적용하여 효율성 증대
 
-### 4. 소개 및 시연 영상
-> 프로젝트에 대한 소개와 시연 영상을 넣으세요.
+&nbsp;
+---------------------------------------
+### 2. 소개 및 시연 영상
 
-### 5. 팀 소개
-> 팀원 소개 & 구성원 별 역할 분담 & 간단한 연락처를 작성하세요.
+[![부산대학교 정보컴퓨터공학부 소개](http://img.youtube.com/vi/IAcQLQaV-dI/0.jpg)](https://www.youtube.com/watch?v=IAcQLQaV-dI)
+
+&nbsp;
+---------------------------------------
+
+### 3. 시스템 구성
+
+&nbsp;
+
+<img width="800" alt="Tech Stack Diagram (Copy) (7)" src="https://github.com/user-attachments/assets/52787a84-3b3d-475c-b7ef-061ca538d35c">
+
+&nbsp;
+
+- Python
+- PyTorch
+- 교통 시뮬레이터 : [CARLA Simulator](https://carla.org/), [SUMO Simulator](https://eclipse.dev/sumo/)
+- 객체 탐지 모델 : [YOLOv8](https://docs.ultralytics.com/models/yolov8/)
+- 객체 추적 알고리즘 : [ByteTrack](https://github.com/ifzhang/ByteTrack)
+
+&nbsp;
+---------------------------------------
+
+### 4. 설치 방법
+
+#### 4.1. Carla Simulator 설치
+
+**시스템 요구사항**
+
+* x64 시스템
+* 165GB 디스크 공간
+* 최소 6GB 이상의 GPU
+* 2000, 2001 TCP 포트
+
+&nbsp;
+
+**소프트웨어 요구사항**
+
+* CMake: 빌드 파일을 생성하기 위해 필요. version >= 3.15
+* Git: Carla repositories를 관리하기 위해 필요.
+* Make: 실행 파일을 생성하기 위해 필요. version == 3.81
+* 7Zip: asset 파일의 압축 해체에 필요.
+* Python3 x64: 다른 버전이나 x32 버전은 제거 권장
+* [Windows 8.1 SDK](https://developer.microsoft.com/ko-kr/windows/downloads/sdk-archive/)
+
+&nbsp;
+
+**Visual Studio 2019**
+* C++를 사용한 데스크톱 개발
+  * MSVC v140 -VS 2015 C++ 빌드 도구(v14.00)
+* C++를 사용한 게임 개발
+* x64 Visual C++ Toolset
+* .Net framework 4.6.2 개발 도구
+
+&nbsp;
+
+**Python Dependencies**
+```
+pip3 -V
+pip3 install --upgrade pip
+pip3 install --user setuptools
+pip3 install --user wheel
 ```
 
-## 5. README.md 작성팁 
-* 마크다운 언어를 이용해 README.md 파일을 작성할 때 참고할 수 있는 마크다운 언어 문법을 공유합니다.  
-* 다양한 예제와 보다 자세한 문법은 [이 문서](https://www.markdownguide.org/basic-syntax/)를 참고하세요.
+&nbsp;
 
-### 5.1. 헤더 Header
+**Unreal Engine**
+
+먼저, 언리얼 엔진을 포크하여 다운로드하기 위해서는 Github 계정이 언리얼 엔진과 연동되어 있어야 한다. 자세한 내용은 아래 링크에서 확인할 수 있다.
+[Accessing Unreal Engine Source](https://www.unrealengine.com/en-US/ue-on-github)
+
+1. 언리얼 엔진 소스코드 클론
 ```
-# This is a Header 1
-## This is a Header 2
-### This is a Header 3
-#### This is a Header 4
-##### This is a Header 5
-###### This is a Header 6
-####### This is a Header 7 은 지원되지 않습니다.
+git clone --depth 1 -b carla https://github.com/CarlaUnreal/UnrealEngine.git .
 ```
-<br />
 
-### 5.2. 인용문 BlockQuote
+언리얼 엔진의 경로는 C:\\\\로 하는것을 권장한다.
+
+2. Configuration Script 실행
 ```
-> This is a first blockqute.
->	> This is a second blockqute.
->	>	> This is a third blockqute.
+Setup.bat
+GenerateProjectFiles.bat
 ```
-> This is a first blockqute.
->	> This is a second blockqute.
->	>	> This is a third blockqute.
-<br />
 
-### 5.3. 목록 List
-* **Ordered List**
+3. 개조된 엔진 컴파일
+   - Visual Studio 2019로 UE4.sln 열기
+   - "Development Editor". "Win64", "UnrealBuildTool" 옵션을 선택
+   - Solution Explorer에서 UE4를 우클릭 후 빌드
+
+4. 컴파일이 성공적으로 되었는지 확인하려면 Engine\Binaries\Win64\UE4Editor.exe 을 실행
+
+&nbsp;
+
+**Carla 빌드**
+
+1. Carla repository 클론
 ```
-1. first
-2. second
-3. third  
+git clone https://github.com/carla-simulator/carla
 ```
-1. first
-2. second
-3. third
-<br />
 
-* **Unordered List**
+2. 최신 버전의 Assets 다운로드
+
+아래 Script 실행
 ```
-* 하나
-  * 둘
-
-+ 하나
-  + 둘
-
-- 하나
-  - 둘
+Update.bat
 ```
-* 하나
-  * 둘
 
-+ 하나
-  + 둘
+3. Unreal Engine 환경 변수 설정
 
-- 하나
-  - 둘
-<br />
+- 윈도우 시스템 환경 변수에 Unreal Engine 루트 경로를 **UE4_ROOT** 이름으로 새로 만든다.
 
-### 5.4. 코드 CodeBlock
-* 코드 블럭 이용 '``'
+4. Carla 빌드
+**x64 Native Tools Command Prompt for VS 2019**를 실행한다.
+
+&nbsp;
+
+**Python API 클라이언트 컴파일**
+
+Carla의 루트 경로에서 아래 명령어를 실행한다.
+
 ```
-여러줄 주석 "```" 이용
-"```
-#include <stdio.h>
-int main(void){
-  printf("Hello world!");
-  return 0;
-}
-```"
-
-단어 주석 "`" 이용
-"`Hello world`"
-
-* 큰 따움표(") 없이 사용하세요.
-``` 
-<br />
-
-### 5.5. 링크 Link
+make PythonAPI
 ```
-[Title](link)
-[부산대학교 정보컴퓨터공학부](https://cse.pusan.ac.kr/cse/index..do)
 
-<link>
-<https://cse.pusan.ac.kr/cse/index..do>
-``` 
-[부산대학교 정보컴퓨터공학부](https://cse.pusan.ac.kr/cse/index..do)
+PythonAPI/carla/dist 폴더에 .egg 파일과 .whl 파일이 생성되었는지 확인한다.
 
-<https://cse.pusan.ac.kr/cse/index..do>
-<br />
+&nbsp;
 
-### 5.6. 강조 Highlighting
+**서버 컴파일**
+
+Carla의 루트 경로에서 아래 명령어를 실행한다.
 ```
-*single asterisks*
-_single underscores_
-**double asterisks**
-__double underscores__
-~~cancelline~~
+make launch
 ```
-*single asterisks* <br />
-_single underscores_ <br />
-**double asterisks** <br />
-__double underscores__ <br />
-~~cancelline~~  <br />
-<br />
 
-### 5.7. 이미지 Image
+Unreal Engine 4 Editor가 실행되면 성공적으로 설치된 것이다.
+
+5. Import Assets
+
+Capstone Repository의 Import 폴더 내의 파일들을 carla/Import 폴더에 복사 후 아래 명령어를 실행한다.
+
+만약 Editor가 실행중이라면 종료 후 실행한다.
+
 ```
-<img src="image URL" width="600px" title="Title" alt="Alt text"></img>
-![Alt text](image URL "Optional title")
+make import
 ```
-- 웹에서 작성한다면 README.md 내용 안으로 이미지를 드래그 앤 드롭하면 이미지가 생성됩니다.
-- 웹이 아닌 로컬에서 작성한다면, github issue에 이미지를 드래그 앤 드롭하여 image url 을 얻을 수 있습니다. (URL만 복사하고 issue는 제출 안 함.)
-  <img src="https://github.com/user-attachments/assets/0fe3bff1-7a2b-4df3-b230-cac4ef5f6d0b" alt="이슈에 image 올림" width="600" />
-  <img src="https://github.com/user-attachments/assets/251c6d42-b36b-4ad4-9cfa-fa2cc67a9a50" alt="image url 복사" width="600" />
 
+Editor의 컨텐츠 브라우저의 루트 경로에, map_package가 생성되었다면 성공적으로 import된 것이다.
 
-### 5.8. 유튜브 영상 추가
-```markdown
-[![영상 이름](유튜브 영상 썸네일 URL)](유튜브 영상 URL)
-[![부산대학교 정보컴퓨터공학부 소개](http://img.youtube.com/vi/zh_gQ_lmLqE/0.jpg)](https://www.youtube.com/watch?v=zh_gQ_lmLqE)    
+&nbsp;
+
+#### 4.2. 기타 S/W 및 라이브러리 설치
+
+- SUMO simulator <https://sumo.dlr.de/docs/Downloads.php>
+- python 3.8.20
+- sumo 1.20.0
+- numpy 1.23.5
+  
+*이하는 PC환경 및 GPU에 따라 버전을 맞추어 설치해야함
+(아래는 Windows10, Nvidia GPU 8.6 (RTX 3060) 환경의 경우)
+
+- cuda 11.8
+- cuDNN 8.9.3
+- pytorch 2.4.1
+
+&nbsp;
+---------------------------------------
+
+### 5. 사용법
+
+#### 5.1. CARLA 시뮬레이터를 사용한 모델 학습 및 추론
+
+**맵 지정**
+
+컨텐츠 브라우저의 map_package의 cross_01.umap 파일을 연다.
+
+맵을 연 상태에서, Alt+P 를 눌러, 시뮬레이션 환경을 실행한다.
+
+&nbsp;
+
+**모델 학습**
+
 ```
-[![부산대학교 정보컴퓨터공학부 소개](http://img.youtube.com/vi/zh_gQ_lmLqE/0.jpg)](https://www.youtube.com/watch?v=zh_gQ_lmLqE)    
+cd app
+```
 
-- 이때 유튜브 영상 썸네일 URL은 유투브 영상 URL로부터 다음과 같이 얻을 수 있습니다.
+app 폴더로 이동한다.
 
-- `Youtube URL`: https://www.youtube.com/watch?v={동영상 ID}
-- `Youtube Thumbnail URL`: http://img.youtube.com/vi/{동영상 ID}/0.jpg 
-- 예를 들어, https://www.youtube.com/watch?v=zh_gQ_lmLqE 라고 하면 썸네일의 주소는 http://img.youtube.com/vi/zh_gQ_lmLqE/0.jpg 이다.
+```
+python train.py --simulator carla
+// or python train.py -s carla
+```
 
+실행 시 시뮬레이션 창에서 시뮬레이션이 시작되고, 카메라 뷰 창과 Total Reward 창이 켜진다.
+
+- 카메라 뷰 창
+  
+   북, 동, 남, 서 방향의 교차로 진입지점의 실시간 카메라 뷰가 나타난다.
+
+   각 뷰 하단에 현 교통 신호가 색깔로 나타나고 각 차선별 소요 프레임수의 총합이 출력된다.
+
+   프레임 상에 관심구역(ROI)가 선으로 표현되어 있으며 진입하는 각 차량을 둘러싼 바운딩박스가 그려진다.
+
+   각 차량별 id와, ROI 내부에 머물렀던 총 프레임수(소요 프레임 : lasted frames)가 바운딩박스에 달린 레이블에 출력된다.
+
+- Total Reward 창
+  
+   Total Reward는 한 에피소드당 총 Reward(모든 차량의 소요프레임수의 합; 차량 대기시간과 비례)의 합에 음수를 취한 값이며, (이상적으로) 학습이 진행될수록 그래프가 서서히 증가 및 수렴한다.
+
+Ctrl + C 시 학습 또는 추론이 중단되며, Total Reward 창을 닫으면 프로그램이 종료된다.
+
+종료 시 학습이 완료된 모델(dqn_model.pth), Total Reward 그래프와, 해당 Total Reward들의 실제 값을 기록한 텍스트파일이 아래 위치에 저장된다.
+
+- app > results > carla > training
+   
+&nbsp;
+
+**모델 추론**
+
+0. Pretrained Model
+   
+   아래 링크에서 미리 학습 완료한 Carla 강화학습 모델을 받을 수 있다.
+   
+   https://drive.google.com/file/d/1F__vD_Jpml5k_sgPX6YjsBXZSXZiMISq/view?usp=sharing
+   
+   받은 모델을 app > results > carla > training 폴더에 위치시키면 된다.
+ 
+
+1. 학습한 모델로 추론
+   
+```
+python control.py --simulator carla
+// or python control.py -s carla
+```
+
+실행시 위의 모델 학습과 동일한 창들이 켜지며, 이번에는 미리 학습된 모델이 교차로의 신호를 제어하는 것을 볼 수 있다. 
+
+이에 대한 Reward도 마찬가지로 Total Reward창에 나타난다.
+
+
+2. 고정주기식 신호로 제어 (모델 미사용, 고정주기식 제어)
+   
+```
+python control.py --simulator carla --fixed
+// or python control.py -s carla -f
+```
+
+또는 학습한 모델과의 비교를 위해 고정주기식 신호로 테스트를 할 수 있다.
+
+Ctrl + C 시 학습 또는 추론이 중단되며, Total Reward 창을 닫으면 프로그램이 종료된다.
+
+종료 시 Total Reward 그래프와 해당 Total Reward들의 실제 값을 기록한 텍스트파일이 아래 위치에 저장된다.
+
+- app > results > carla > inference
+
+&nbsp;
+
+#### 5.2. SUMO 시뮬레이터를 사용한 모델 학습 및 추론
+
+**모델 학습**
+
+```
+cd app
+```
+
+app 폴더로 이동한다.
+
+```
+python train.py --simulator sumo
+// or python train.py -s sumo
+```
+
+실행 시 시뮬레이션 창과 Total Reward 창이 켜진다.
+
+- Total Reward 창
+   
+   Total Reward는 한 에피소드당 총 Reward(모든 차량의 대기시간의 합)의 합에 음수를 취한 값이며, (이상적으로) 학습이 진행될수록 그래프가 서서히 증가 및 수렴한다.
+
+
+Ctrl + C 시 학습 또는 추론이 중단되며, Total Reward 창을 닫으면 프로그램이 종료된다.
+
+종료 시 학습이 완료된 모델(dqn_model.pth), Total Reward 그래프와, 해당 Total Reward들의 실제 값을 기록한 텍스트파일이 아래 위치에 저장된다.
+
+- app > results > sumo > training
+   
+&nbsp;
+
+**모델 추론**
+
+1. 학습한 모델로 추론
+   
+```
+python control.py --simulator sumo
+// or python control.py -s sumo 
+```
+
+실행 시 위의 모델 학습과 동일한 창들이 켜지며, 이번에는 미리 학습된 모델이 교차로의 신호를 제어하는 것을 볼 수 있다. 
+
+이에 대한 Reward도 마찬가지로 Total Reward창에 나타난다.
+
+2. 고정 주기식 신호로 추론 (모델 미사용, 고정주기식 제어)
+   
+```
+python control.py --simulator sumo --fixed
+// or python control.py -s sumo -f
+```
+
+또는 학습한 모델과의 비교를 위해 고정주기식 신호로 테스트를 할 수 있다.
+
+Ctrl + C 시 학습 또는 추론이 중단되며, Total Reward 창을 닫으면 프로그램이 종료된다.
+
+종료 시 Total Reward 그래프와 해당 Total Reward들의 실제 값을 기록한 텍스트파일이 아래 위치에 저장된다.
+
+- app > results > sumo > inference
+
+&nbsp;
+---------------------------------------
+
+### 6. 팀 소개
+
+**권오성 200628104 (gbkos@pusan.ac.kr)**
+- DQN(Deep Q-Network)의 구조적 설계 담당
+
+**이준표 202155652 (junpyo319@gmail.com)**
+- CARLA 시뮬레이터로 교차로 환경을 구현하고 API 제작
+
+**정하립 201924578 (jeonghalib@gmail.com)**
+- SUMO 교차로 환경구현 및 객체탐지 모델을 활용한 Reward 알고리즘 제작
